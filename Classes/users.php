@@ -1,18 +1,17 @@
 <?php
 
 class User{
-    public $name;
-    public $surname;
-    public $email;
-    public $age;
+    protected $name;
+    protected $surname;
+    protected $email;
+    protected $age;
+    protected $prime = false;
 
-    function __construct($name, $surname, $email, $age)
+    function __construct($name, $surname, $email)
     {
         $this->setName($name);
         $this->setSurname($surname);
         $this->setEmail($email);
-        $this->setAge($age);
-
     }
 
     public function setName($value){
@@ -32,6 +31,8 @@ class User{
     public function setEmail($value){
         if (strpos($value, '@') && strpos($value, '.')) {
             $this->email = $value;
+        } else {
+            throw new Exception('Mail Non Valida');
         }
     }
     public function getEmail(){
@@ -41,11 +42,23 @@ class User{
     public function setAge($value){
         if (is_int($value)) {
             $this->age = $value;
+        } else {
+            throw new Exception('Età deve essere un numero');
         }
     }
     public function getAge(){
         return $this->age;
     }
+
+    public function setPrime($value){
+        $this->prime = $value;
+    }
+
+    // try {
+    //     //code...
+    // } catch (Exception $e) {
+    //     echo 'Eccezione : ' . $e->getMessage('fatality');
+    // }
 };
 
 ?>
